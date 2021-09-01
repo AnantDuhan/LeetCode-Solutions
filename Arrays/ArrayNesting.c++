@@ -1,17 +1,21 @@
-// Approach 1 - Brute Force(TLE)
+// Approach 2 - Optimised 
 class Solution {
 public:
     int arrayNesting(vector<int>& nums) {
-        int res = 0;
-        for(int i=0;i<nums.size();i++) {
-            int start = nums[i], count = 0;
-            do {
-                start = nums[start];
-                count++;
+        int n = nums.size();
+        vector<int>vis(n,0);
+        int ans = 0;
+        for(int i=0; i<n; i++){
+            if(vis[i] == 1)
+                continue;
+            int c=0;
+            while(vis[i]==0){
+                c++;
+                vis[i]=1;
+                i=nums[i];
             }
-            while(start != nums[i]);
-            res = max(res, count);
+            ans=max(ans,c);
         }
-        return res;
+        return ans;
     }
 };
