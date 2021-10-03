@@ -1,5 +1,5 @@
 class Solution {
-public:
+public: 
     int jump(vector<int>& nums) {
         int n = nums.size(), i;
         int jumps = 0, maxReach = 0, currReach = 0;
