@@ -3,9 +3,12 @@ public:
     int bitwiseComplement(int n) {
         vector<int> v;
 
-        while (num != 0) {
-            v.push_back(num % 2);
-            num = num / 2;
+        if (n == 0)
+            return 1;
+
+        while (n != 0) {
+            v.push_back(n % 2);
+            n = n / 2;
         }
         reverse(v.begin(), v.end());
 
@@ -17,9 +20,9 @@ public:
         }
         long long int two = 1;
         for (int i = v.size() - 1; i >= 0; i--) {
-            num = num + v[i] * two;
+            n = n + v[i] * two;
             two = two * 2;
         }
-        return num;
+        return n;
     }
 };
