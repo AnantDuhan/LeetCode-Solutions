@@ -1,30 +1,53 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+// TC - O(n1+n2), SC - O(n1+n2)
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode* res = NULL;
+        if (list1 == NULL)
+            return list2;
+        else if (list2 == NULL)
+            return list1;
+
+        if (list1->val <= list2->val) {
+            res = list1;
+            res->next = mergeTwoLists(list1->next, list2);
+        } else {
+            res = list2;
+            res->next = mergeTwoLists(list1, list2->next);
+        }
+        return res;
+    }
+};
+
+// TC - O(n1+n2), SC - O(1)
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        ListNode* result = NULL;
-        
-        if (l1 == NULL)
-            return(l2);
-        else if (l2 == NULL)
-            return(l1);
-        
-        if (l1->val <= l2->val) {
-            result = l1;
-            result->next = mergeTwoLists(l1->next, l2);
-        } else {
-            result = l2;
-            result->next = mergeTwoLists(l1, l2->next);
+        ListNode* res = new ListNode();
+        ListNode* temp = res;
+
+        while (l1 != NULL && l2 != NULL) {
+            if (l1->val < l2->val) {
+                res->next = l1;
+                res = res->next;
+                l1 = l1->next;
+            } else {
+                res->next = l2;
+                res = res->next;
+                l2 = l2->next;
+            }
         }
-        return(result);
+
+        while (l1 != NULL) {
+            res->next = l1;
+            res = res->next;
+            l1 = l1->next;
+        }
+        while (l2 != NULL) {
+            res->next = l2;
+            res = res->next;
+            l2 = l2->next;
+        }
+        return temp->next;
     }
 };
