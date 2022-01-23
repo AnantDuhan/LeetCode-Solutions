@@ -1,3 +1,4 @@
+TC - O(N root(N)), SC - O(N)
 class Solution {
 public:
     bool winnerSquareGame(int n) {
