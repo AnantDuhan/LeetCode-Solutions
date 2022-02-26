@@ -36,6 +36,8 @@ public:
                     pq.push({chr1, frq1});
                 }
             } else {
+
+                // cout << "h1" << endl;
                 if (pq.size() == 0)
                     break;
                 int chr2 = pq.top().first;
